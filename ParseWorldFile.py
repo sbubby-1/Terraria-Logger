@@ -56,16 +56,6 @@ def initializeOffsets(file):
     numberOfSections = ReadDataTypes.readShort(file)
 
     # Offset to each section
-    # 0. Header
-    # 1. Tile Data
-    # 2. Chests
-    # 3. Signs
-    # 4. NPCs
-    # 5. Entities
-    # 6. Pressure Plates
-    # 7. Town Manager
-    # 8. Bestiary
-    # 9. Journey Powers
     offsets = []
     for _ in range(numberOfSections):
         curr_offset = ReadDataTypes.readInt(file)
