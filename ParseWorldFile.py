@@ -37,6 +37,7 @@ def processHeader(file, headerOffset):
                     WorldInfo.bossesSlain[field] = processedValue
             else:
                 skipPast(file, dataType)
+        multiplier = 1
 
 
 def process(file, dataType):

@@ -25,9 +25,9 @@ def sizeOf(dataType):
         case "Byte":
             return 1
         case "Bool":
-            return 2
+            return 1
         case "Int16":
-            return 4
+            return 2
         case "Int32":
             return 4
         case "Int64":
@@ -37,7 +37,7 @@ def sizeOf(dataType):
         case "Double":
             return 8
         case "Rect":
-            return 32
+            return 16
         case _:
             dataType, multiplier = dataType.split(" ")
             return int(multiplier) * sizeOf(dataType)

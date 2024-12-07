@@ -16,8 +16,6 @@
   "Remix World": { "type": "Bool", "isRelevant": false },
   "No Traps": { "type": "Bool", "isRelevant": false },
   "Zenith": { "type": "Bool", "isRelevant": false },
-  "Expert (obsolete)": { "type": "Bool", "isRelevant": false },
-  "Master (obsolete)": { "type": "Bool", "isRelevant": false },
   "Creation Time": { "type": "Int64", "isRelevant": false },
   "Moon Type": { "type": "Byte", "isRelevant": false },
   "Tree Type X Coordinates": { "type": "Int32 3", "isRelevant": false },
