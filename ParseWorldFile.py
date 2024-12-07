@@ -1,5 +1,7 @@
 import Metadata
 import ReadDataTypes
+import WorldInfo
+from CustomExceptions.InvalidDataType import InvalidDataType
 from CustomExceptions.InvalidWorldFile import InvalidWorldFile
 
 
@@ -14,6 +16,49 @@ def analyzeWorld(filepath):
 
 def processHeader(file, headerOffset):
     file.seek(headerOffset, 0)
+    Metadata.initializeHeaderFields()
+
+    multiplier = 1
+    for field, value in Metadata.headerFields.items():
+        dataType = value["type"]
+        isRelevant = value["isRelevant"]
+
+        if field in Metadata.multiplierFields:
+            multiplier = process(file, dataType)
+            continue
+
+        for _ in range(multiplier):
+            if isRelevant:
+                processedValue = process(file, dataType)
+
+                WorldInfo.relevantInfo[field] = processedValue
+
+                if field in WorldInfo.bossesSlain:
+                    WorldInfo.bossesSlain[field] = processedValue
+            else:
+                skipPast(file, dataType)
+
+
+def process(file, dataType):
+    match dataType:
+        case "Byte":
+            return ReadDataTypes.readByte(file)
+        case "Bool":
+            return ReadDataTypes.readBoolean(file)
+        case "Int16":
+            return ReadDataTypes.readInt16(file)
+        case "Int32":
+            return ReadDataTypes.readInt32(file)
+        case "Int64":
+            return ReadDataTypes.readInt64(file)
+        case "Single":
+            return ReadDataTypes.readSingle(file)
+        case "Double":
+            return ReadDataTypes.readDouble(file)
+        case "String":
+            return ReadDataTypes.readString(file)
+        case _:
+            raise InvalidDataType(dataType)
 
 
 def skipPast(file, dataType):
@@ -21,7 +66,7 @@ def skipPast(file, dataType):
         case "String":
             _ = ReadDataTypes.readString(file)
         case _:
-            file.seek(Metadata.sizeOf(dataType))
+            file.seek(Metadata.sizeOf(dataType), 1)
 
 
 def initializeOffsets(file):

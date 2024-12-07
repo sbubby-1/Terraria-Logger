@@ -22,4 +22,6 @@ else:
     numberOfTestsPassed += 1
 numberOfTests += 1
 
+HeaderParseTests.processHeaderTests()
+
 print(f"{numberOfTestsPassed} out of {numberOfTests} passed.")

@@ -39,7 +39,7 @@
   "Dungeon X": { "type": "Int32", "isRelevant": true },
   "Dungeon Y": { "type": "Int32", "isRelevant": false },
   "Crimson": { "type": "Bool", "isRelevant": false },
-  "Eye Of Cthulhu": { "type": "Bool", "isRelevant": true },
+  "Eye of Cthulhu": { "type": "Bool", "isRelevant": true },
   "Evil Boss": { "type": "Bool", "isRelevant": true },
   "Skeletron": { "type": "Bool", "isRelevant": true },
   "Queen Bee": { "type": "Bool", "isRelevant": true },
@@ -118,7 +118,7 @@
   "Manual Party Active": { "type": "Bool", "isRelevant": false },
   "Genuine Party Active": { "type": "Bool", "isRelevant": false },
   "Party Cooldown": { "type": "Int32", "isRelevant": false },
-  "Number Of Partiers": { "type": "Int32", "isRelevant": true },
+  "Number of Partiers": { "type": "Int32", "isRelevant": true },
   "Partying NPCs": { "type": "Int32", "isRelevant": false },
   "Sandstorm Active": { "type": "Bool", "isRelevant": false },
   "Sandstorm Time Left": { "type": "Int32", "isRelevant": false },
@@ -149,7 +149,7 @@
   "Bought Cat": { "type": "Bool", "isRelevant": false },
   "Bought Dog": { "type": "Bool", "isRelevant": false },
   "Bought Bunny": { "type": "Bool", "isRelevant": false },
-  "Empress Of Light": { "type": "Bool", "isRelevant": true },
+  "Empress of Light": { "type": "Bool", "isRelevant": true },
   "Queen Slime": { "type": "Bool", "isRelevant": true },
   "Deerclops": { "type": "Bool", "isRelevant": true }
 }
