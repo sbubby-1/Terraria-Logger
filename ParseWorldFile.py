@@ -25,7 +25,7 @@ def skipPast(file, dataType):
 
 
 def initializeOffsets(file):
-    version = ReadDataTypes.readInt(file)
+    version = ReadDataTypes.readInt32(file)
     # 1.4.4.9 = 279
     if version < 267:
         raise InvalidWorldFile(
@@ -52,7 +52,7 @@ def initializeOffsets(file):
         raise InvalidWorldFile("The filetype is " + fileTypeString)
 
     # Number of times the file has been edited
-    revision = ReadDataTypes.readInt(file)
+    revision = ReadDataTypes.readInt32(file)
     if revision <= 1:
         raise InvalidWorldFile("This is a fresh world.")
 
@@ -61,12 +61,12 @@ def initializeOffsets(file):
     file.seek(8, 1)
 
     # Number of sections in the file
-    numberOfSections = ReadDataTypes.readShort(file)
+    numberOfSections = ReadDataTypes.readInt16(file)
 
     # Offset to each section
     offsets = []
     for _ in range(numberOfSections):
-        curr_offset = ReadDataTypes.readInt(file)
+        curr_offset = ReadDataTypes.readInt32(file)
         offsets.append(curr_offset)
 
     return offsets

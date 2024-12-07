@@ -1,7 +1,19 @@
+import json
+from collections import OrderedDict
 from enum import Enum
 
 import ReadDataTypes
 from CustomExceptions.InvalidDataType import InvalidDataType
+
+headerValuesFilepath = "HeaderValues.json"
+
+headerFields = OrderedDict()
+
+
+def initializeHeaderFields():
+    with open(headerValuesFilepath, "r") as file:
+        global headerFields
+        headerFields = json.load(file, object_pairs_hook=OrderedDict)
 
 
 def process(file, dataType):
