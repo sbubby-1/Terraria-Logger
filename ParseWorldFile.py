@@ -1,19 +1,27 @@
+import Metadata
 import ReadDataTypes
 from CustomExceptions.InvalidWorldFile import InvalidWorldFile
-from Metadata import OffsetIndices
 
 
 def analyzeWorld(filepath):
     file = open(filepath, "rb")
     offsets = initializeOffsets(file)
 
-    processHeader(file, offsets[OffsetIndices.HEADER.value])
+    processHeader(file, offsets[Metadata.OffsetIndices.HEADER.value])
 
     file.close()
 
 
 def processHeader(file, headerOffset):
     file.seek(headerOffset, 0)
+
+
+def skipPast(file, dataType):
+    match dataType:
+        case "String":
+            _ = ReadDataTypes.readString(file)
+        case _:
+            file.seek(Metadata.sizeOf(dataType))
 
 
 def initializeOffsets(file):

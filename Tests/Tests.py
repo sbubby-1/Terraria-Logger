@@ -15,4 +15,4 @@ else:
     numberOfTestsPassed += 1
 numberOfTests += 1
 
-print(str(numberOfTestsPassed) + " out of " + str(numberOfTests) + " tests passed.")
+print(f"{numberOfTestsPassed} out of {numberOfTests} passed.")
