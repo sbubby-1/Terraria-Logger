@@ -22,6 +22,10 @@ else:
     numberOfTestsPassed += 1
 numberOfTests += 1
 
-HeaderParseTests.processHeaderTests()
+if not HeaderParseTests.processHeaderTests():
+    print("processHeaderTests failed. \n")
+else:
+    numberOfTestsPassed += 1
+numberOfTests += 1
 
 print(f"{numberOfTestsPassed} out of {numberOfTests} passed.")

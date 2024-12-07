@@ -10,7 +10,7 @@ from WorldFiles.Filepaths import WorldFilepaths
 
 def initializeOffsetsWithFreshWorld():
     success = True
-    with open(WorldFilepaths.FRESH_WORLD.value, "rb") as file:
+    with open(WorldFilepaths.FRESH_WORLD.value.filepath, "rb") as file:
         try:
             ParseWorldFile.initializeOffsets(file)
             success = False
@@ -22,7 +22,7 @@ def initializeOffsetsWithFreshWorld():
 
 def initializeOffsetsWithRevisedWorld():
     success = True
-    with open(WorldFilepaths.PYRAMID.value, "rb") as file:
+    with open(WorldFilepaths.PYRAMID.value.filepath, "rb") as file:
         try:
             ParseWorldFile.initializeOffsets(file)
         except InvalidWorldFile:

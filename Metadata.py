@@ -44,6 +44,7 @@ def sizeOf(dataType):
 
 
 class OffsetIndices(Enum):
+    INITIALIZATION = -1
     HEADER = 0
     TILE_DATA = 1
     CHESTS = 2

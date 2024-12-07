@@ -8,7 +8,7 @@ import ParseWorldFile
 import WorldInfo
 from WorldFiles.Filepaths import WorldFilepaths
 
-expectedHeaderFieldCount = 153
+# expectedHeaderFieldCount = 153
 
 
 def initializeHeaderFieldsTests():
@@ -16,8 +16,8 @@ def initializeHeaderFieldsTests():
 
     Metadata.initializeHeaderFields()
 
-    if expectedHeaderFieldCount != 153:
-        success = False
+    # if expectedHeaderFieldCount != 153:
+    #     success = False
 
     for key, value in Metadata.headerFields.items():
         if (
@@ -33,20 +33,32 @@ def initializeHeaderFieldsTests():
 
 def processHeaderTests():
     success = True
+    filesUsed = 0
 
-    file = open(WorldFilepaths.PYRAMID.value, "rb")
-    offsets = ParseWorldFile.initializeOffsets(file)
+    for worldFileEnum in WorldFilepaths:
+        worldFile = worldFileEnum.value
+        if worldFile.location != Metadata.OffsetIndices.HEADER.value:
+            continue
 
-    ParseWorldFile.processHeader(file, offsets[Metadata.OffsetIndices.HEADER.value])
+        filesUsed += 1
+        file = open(worldFile.filepath, "rb")
+        offsets = ParseWorldFile.initializeOffsets(file)
 
-    for key, value in WorldInfo.bossesSlain.items():
-        print(f"{key} : {value}")
+        ParseWorldFile.processHeader(file, offsets[Metadata.OffsetIndices.HEADER.value])
 
-    for key, value in WorldInfo.relevantInfo.items():
-        print(f"{key} : {value}")
+        if WorldInfo.relevantInfo[worldFile.headerField] == False:
+            success = False
+        if worldFile.headerField in WorldInfo.bossesSlain:
+            if WorldInfo.bossesSlain[worldFile.headerField] == False:
+                success = False
 
-    print()
+        for boss in WorldInfo.bossesSlain.keys():
+            WorldInfo.bossesSlain[boss] = False
+        WorldInfo.relevantInfo.clear()
 
-    file.close()
+        file.close()
+
+    if filesUsed != 19:
+        success = False
 
     return success
