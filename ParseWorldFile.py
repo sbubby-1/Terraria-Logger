@@ -1,5 +1,19 @@
 import ReadDataTypes
 from CustomExceptions.InvalidWorldFile import InvalidWorldFile
+from Metadata import OffsetIndices
+
+
+def analyzeWorld(filepath):
+    file = open(filepath, "rb")
+    offsets = initializeOffsets(file)
+
+    processHeader(file, offsets[OffsetIndices.HEADER.value])
+
+    file.close()
+
+
+def processHeader(file, headerOffset):
+    file.seek(headerOffset, 0)
 
 
 def initializeOffsets(file):
