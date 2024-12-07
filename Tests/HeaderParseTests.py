@@ -6,6 +6,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 import Metadata
 import ParseWorldFile
 import WorldInfo
+from WorldFiles.Filepaths import WorldFilepaths
 
 expectedHeaderFieldCount = 153
 
@@ -33,7 +34,7 @@ def initializeHeaderFieldsTests():
 def processHeaderTests():
     success = True
 
-    file = open("./WorldFiles/PostShimmerWorld.wld", "rb")
+    file = open(WorldFilepaths.PYRAMID.value, "rb")
     offsets = ParseWorldFile.initializeOffsets(file)
 
     ParseWorldFile.processHeader(file, offsets[Metadata.OffsetIndices.HEADER.value])

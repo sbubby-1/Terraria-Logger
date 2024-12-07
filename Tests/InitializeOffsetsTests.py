@@ -5,11 +5,12 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 import ParseWorldFile
 from CustomExceptions.InvalidWorldFile import InvalidWorldFile
+from WorldFiles.Filepaths import WorldFilepaths
 
 
 def initializeOffsetsWithFreshWorld():
     success = True
-    with open("./WorldFiles/FreshWorld.wld", "rb") as file:
+    with open(WorldFilepaths.FRESH_WORLD.value, "rb") as file:
         try:
             ParseWorldFile.initializeOffsets(file)
             success = False
@@ -21,7 +22,7 @@ def initializeOffsetsWithFreshWorld():
 
 def initializeOffsetsWithRevisedWorld():
     success = True
-    with open("./WorldFiles/PostShimmerWorld.wld", "rb") as file:
+    with open(WorldFilepaths.PYRAMID.value, "rb") as file:
         try:
             ParseWorldFile.initializeOffsets(file)
         except InvalidWorldFile:
