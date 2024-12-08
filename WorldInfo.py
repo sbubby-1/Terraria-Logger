@@ -3,6 +3,7 @@ pyramidItems = []
 housingBuilt = False
 guideInHell = False
 npcAtShimmer = False
+talkedToDemo = False
 
 bossesSlain = {
     "Eye of Cthulhu": False,

@@ -15,6 +15,7 @@ RELEVANT_HEADER_FIELDS = 19
 def runTests():
     numberOfTestsPassed = 0
     numberOfTests = 0
+
     if not initializeHeaderFieldsTests():
         print("initializeHeaderFieldsTests failed. \n")
     else:

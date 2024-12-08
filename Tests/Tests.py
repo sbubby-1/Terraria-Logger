@@ -1,3 +1,4 @@
+import BestiaryParseTests
 import ChestDataParseTests
 import HeaderParseTests
 import InitializeOffsetsTests
@@ -19,6 +20,10 @@ numberOfTestsPassed += changePassed
 numberOfTestsRan += changeRan
 
 changePassed, changeRan = TownManagerParseTests.runTests()
+numberOfTestsPassed += changePassed
+numberOfTestsRan += changeRan
+
+changePassed, changeRan = BestiaryParseTests.runTests()
 numberOfTestsPassed += changePassed
 numberOfTestsRan += changeRan
 

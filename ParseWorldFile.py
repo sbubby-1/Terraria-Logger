@@ -14,8 +14,32 @@ def analyzeWorld(filepath):
     processHeader(file, offsets[Metadata.OffsetIndices.HEADER.value])
     processChests(file, offsets[Metadata.OffsetIndices.CHESTS.value])
     processTownManager(file, offsets[Metadata.OffsetIndices.TOWN_MANAGER.value])
+    processBestiary(file, offsets[Metadata.OffsetIndices.BESTIARY.value])
 
     file.close()
+
+
+def processBestiary(file, offset):
+    file.seek(offset, 0)
+
+    numberOfKills = ReadDataTypes.readInt32(file)
+    for _ in range(numberOfKills):
+        # NPC Name
+        _ = ReadDataTypes.readString(file)
+        # Number of times killed
+        file.seek(4, 1)
+
+    numberSeen = ReadDataTypes.readInt32(file)
+    for _ in range(numberSeen):
+        # NPC Name
+        _ = ReadDataTypes.readString(file)
+
+    numberOfNPCsTalkedTo = ReadDataTypes.readInt32(file)
+    for _ in range(numberOfNPCsTalkedTo):
+        npcName = ReadDataTypes.readString(file)
+
+        if npcName == "Demolitionist":
+            WorldInfo.talkedToDemo = True
 
 
 def processTownManager(file, offset):

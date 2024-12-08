@@ -12,6 +12,7 @@ from WorldFiles.Filepaths import WorldFilepaths
 def runTests():
     numberOfTestsPassed = 0
     numberOfTests = 0
+
     if not pyramidLootTests():
         print("pyramidLootTests failed. \n")
     else:
