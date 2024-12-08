@@ -1,5 +1,8 @@
 relevantInfo = {}
 pyramidItems = []
+housingBuilt = False
+guideInHell = False
+npcAtShimmer = False
 
 bossesSlain = {
     "Eye of Cthulhu": False,

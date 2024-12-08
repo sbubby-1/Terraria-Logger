@@ -2,6 +2,7 @@ import Metadata
 import ReadDataTypes
 import WorldInfo
 from CustomExceptions.CorruptedChestData import CorruptedChestData
+from CustomExceptions.InitializationFailed import InitializationFailed
 from CustomExceptions.InvalidDataType import InvalidDataType
 from CustomExceptions.InvalidWorldFile import InvalidWorldFile
 
@@ -12,12 +13,47 @@ def analyzeWorld(filepath):
 
     processHeader(file, offsets[Metadata.OffsetIndices.HEADER.value])
     processChests(file, offsets[Metadata.OffsetIndices.CHESTS.value])
+    processTownManager(file, offsets[Metadata.OffsetIndices.TOWN_MANAGER.value])
 
     file.close()
 
 
-def processChests(file, chestsOffset):
-    file.seek(chestsOffset, 0)
+def processTownManager(file, offset):
+    file.seek(offset, 0)
+
+    if WorldInfo.bossesSlain["Wall of Flesh"]:
+        WorldInfo.housingBuilt = True
+        WorldInfo.guideInHell = True
+        return
+
+    numberOfRooms = ReadDataTypes.readInt32(file)
+    worldWidth = WorldInfo.relevantInfo["World Width"]
+
+    for _ in range(numberOfRooms):
+        npcID = ReadDataTypes.readInt32(file)
+        npcX = ReadDataTypes.readInt32(file)
+        npcY = ReadDataTypes.readInt32(file)
+
+        try:
+            if (
+                npcX < worldWidth * 0.2 + 100 or npcX > worldWidth * 0.8 - 100
+            ) and npcY > WorldInfo.relevantInfo["World Surface Y"]:
+                WorldInfo.npcAtShimmer = True
+
+            # Guide ID
+            if npcID == 22:
+                WorldInfo.housingBuilt = True
+
+                worldHeight = WorldInfo.relevantInfo["World Height"]
+
+                if npcY > worldHeight * 0.75:
+                    WorldInfo.guideInHell = True
+        except Exception:
+            raise InitializationFailed()
+
+
+def processChests(file, offset):
+    file.seek(offset, 0)
 
     numberOfChests = ReadDataTypes.readInt16(file)
     slotsPerChest = ReadDataTypes.readInt16(file)
@@ -73,8 +109,8 @@ def checkIfItemIsPyramidLoot(itemID, chestX, chestY):
         WorldInfo.pyramidItems.append(pyramidItem)
 
 
-def processHeader(file, headerOffset):
-    file.seek(headerOffset, 0)
+def processHeader(file, offset):
+    file.seek(offset, 0)
     Metadata.initializeHeaderFields()
 
     multiplier = 1

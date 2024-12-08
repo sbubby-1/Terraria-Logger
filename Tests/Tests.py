@@ -1,6 +1,7 @@
 import ChestDataParseTests
 import HeaderParseTests
 import InitializeOffsetsTests
+import TownManagerParseTests
 
 numberOfTestsPassed = 0
 numberOfTestsRan = 0
@@ -14,6 +15,10 @@ numberOfTestsPassed += changePassed
 numberOfTestsRan += changeRan
 
 changePassed, changeRan = ChestDataParseTests.runTests()
+numberOfTestsPassed += changePassed
+numberOfTestsRan += changeRan
+
+changePassed, changeRan = TownManagerParseTests.runTests()
 numberOfTestsPassed += changePassed
 numberOfTestsRan += changeRan
 

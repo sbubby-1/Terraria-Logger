@@ -45,7 +45,7 @@ class WorldFilepaths(Enum):
         Metadata.OffsetIndices.HEADER.value,
     )
     HELL_BED_BUILT = WorldFile(
-        "./WorldFiles/HellBetBuilt.wld",
+        "./WorldFiles/HellBedBuilt.wld",
         None,
         Metadata.OffsetIndices.TOWN_MANAGER.value,
     )
