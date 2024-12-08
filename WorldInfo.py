@@ -1,4 +1,5 @@
 relevantInfo = {}
+pyramidItems = []
 
 bossesSlain = {
     "Eye of Cthulhu": False,

@@ -1,17 +1,20 @@
+import ChestDataParseTests
 import HeaderParseTests
 import InitializeOffsetsTests
 
 numberOfTestsPassed = 0
 numberOfTestsRan = 0
 
-initializeOffsetsTestsPassed, initializeOffsetsTestsRan = (
-    InitializeOffsetsTests.runInitializeOffsetTests()
-)
-numberOfTestsPassed += initializeOffsetsTestsPassed
-numberOfTestsRan += initializeOffsetsTestsRan
+changePassed, changeRan = InitializeOffsetsTests.runTests()
+numberOfTestsPassed += changePassed
+numberOfTestsRan += changeRan
 
-headerParseTestsPassed, headerParseTestsRan = HeaderParseTests.runHeaderParseTests()
-numberOfTestsPassed += headerParseTestsPassed
-numberOfTestsRan += headerParseTestsRan
+changePassed, changeRan = HeaderParseTests.runTests()
+numberOfTestsPassed += changePassed
+numberOfTestsRan += changeRan
+
+changePassed, changeRan = ChestDataParseTests.runTests()
+numberOfTestsPassed += changePassed
+numberOfTestsRan += changeRan
 
 print(f"{numberOfTestsPassed} out of {numberOfTestsRan} passed.")

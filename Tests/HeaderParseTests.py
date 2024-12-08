@@ -12,7 +12,7 @@ HEADER_FIELD_COUNT = 152
 RELEVANT_HEADER_FIELDS = 19
 
 
-def runHeaderParseTests():
+def runTests():
     numberOfTestsPassed = 0
     numberOfTests = 0
     if not initializeHeaderFieldsTests():

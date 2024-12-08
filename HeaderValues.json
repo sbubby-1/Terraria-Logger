@@ -60,7 +60,7 @@
   "Shadow Orbs Broken % 3": { "type": "Byte", "isRelevant": false },
   "Altars Smashed": { "type": "Int32", "isRelevant": false },
   "Wall of Flesh": { "type": "Bool", "isRelevant": true },
-  "???": { "type": "Bool", "isRelevant": false },
+  "After Party Of Doom": { "type": "Bool", "isRelevant": false },
   "Invasion Delay": { "type": "Int32", "isRelevant": false },
   "Invasion Size": { "type": "Int32", "isRelevant": false },
   "Invasion Type": { "type": "Int32", "isRelevant": false },

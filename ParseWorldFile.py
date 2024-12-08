@@ -1,6 +1,7 @@
 import Metadata
 import ReadDataTypes
 import WorldInfo
+from CustomExceptions.CorruptedChestData import CorruptedChestData
 from CustomExceptions.InvalidDataType import InvalidDataType
 from CustomExceptions.InvalidWorldFile import InvalidWorldFile
 
@@ -10,8 +11,66 @@ def analyzeWorld(filepath):
     offsets = initializeOffsets(file)
 
     processHeader(file, offsets[Metadata.OffsetIndices.HEADER.value])
+    processChests(file, offsets[Metadata.OffsetIndices.CHESTS.value])
 
     file.close()
+
+
+def processChests(file, chestsOffset):
+    file.seek(chestsOffset, 0)
+
+    numberOfChests = ReadDataTypes.readInt16(file)
+    slotsPerChest = ReadDataTypes.readInt16(file)
+
+    # I don't think storage items that store more or less than 40 items exist?
+    # This is probably for older versions of the game, but I'll leave it in for safety.
+    leftoverSlots = max(0, slotsPerChest - 40)
+    slotsPerChest = min(40, slotsPerChest)
+
+    for _ in range(numberOfChests):
+        chestX = ReadDataTypes.readInt32(file)
+        chestY = ReadDataTypes.readInt32(file)
+        # The name of the chest.
+        _ = ReadDataTypes.readString(file)
+
+        for slotNumber in range(slotsPerChest):
+            stackSize = ReadDataTypes.readInt16(file)
+            if stackSize < 0:
+                raise CorruptedChestData()
+
+            if stackSize > 0:
+                # Pyramid loot is primary loot.
+                # It will be in slot 0 of a chest, unless manually stored by a player.
+                if slotNumber == 0:
+                    itemID = ReadDataTypes.readInt32(file)
+                    # Item prefix
+                    _ = ReadDataTypes.readByte(file)
+
+                    checkIfItemIsPyramidLoot(itemID, chestX, chestY)
+                else:
+                    file.seek(5, 1)
+
+        for _ in range(leftoverSlots):
+            stackSize = ReadDataTypes.readInt16(file)
+            if stackSize < 0:
+                raise CorruptedChestData()
+
+            if stackSize > 0:
+                file.seek(5, 1)
+
+
+def checkIfItemIsPyramidLoot(itemID, chestX, chestY):
+    pyramidItem = None
+    match itemID:
+        case 848:
+            pyramidItem = Metadata.PyramidItem("Pharoah's Mask", chestX, chestY)
+        case 857:
+            pyramidItem = Metadata.PyramidItem("Sandstorm in a Bottle", chestX, chestY)
+        case 934:
+            pyramidItem = Metadata.PyramidItem("Flying Carpet", chestX, chestY)
+
+    if pyramidItem != None:
+        WorldInfo.pyramidItems.append(pyramidItem)
 
 
 def processHeader(file, headerOffset):
@@ -23,7 +82,7 @@ def processHeader(file, headerOffset):
         dataType = value["type"]
         isRelevant = value["isRelevant"]
 
-        if field in Metadata.multiplierFields:
+        if field in Metadata.MULTIPLIER_FIELDS:
             multiplier = process(file, dataType)
             continue
 

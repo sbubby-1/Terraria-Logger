@@ -8,7 +8,7 @@ from CustomExceptions.InvalidWorldFile import InvalidWorldFile
 from WorldFiles.Filepaths import WorldFilepaths
 
 
-def runInitializeOffsetTests():
+def runTests():
     numberOfTestsPassed = 0
     numberOfTests = 0
 

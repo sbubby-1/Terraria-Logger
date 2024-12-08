@@ -6,7 +6,9 @@ headerValuesFilepath = "HeaderValues.json"
 
 headerFields = OrderedDict()
 
-multiplierFields = {
+PYRAMID_ITEM_IDS = {848, 857, 866, 934}
+
+MULTIPLIER_FIELDS = {
     "Number of Players",
     "Kill Count Length",
     "Number of Partiers",
@@ -41,6 +43,13 @@ def sizeOf(dataType):
         case _:
             dataType, multiplier = dataType.split(" ")
             return int(multiplier) * sizeOf(dataType)
+
+
+class PyramidItem:
+    def __init__(self, itemName, chestX, chestY):
+        self.itemName = itemName
+        self.chestX = chestX
+        self.chestY = chestY
 
 
 class OffsetIndices(Enum):
