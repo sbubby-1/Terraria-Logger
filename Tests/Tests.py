@@ -2,30 +2,16 @@ import HeaderParseTests
 import InitializeOffsetsTests
 
 numberOfTestsPassed = 0
-numberOfTests = 0
+numberOfTestsRan = 0
 
-if not InitializeOffsetsTests.initializeOffsetsWithFreshWorld():
-    print("initializeOffsetsWithFreshWorld failed. \n")
-else:
-    numberOfTestsPassed += 1
-numberOfTests += 1
+initializeOffsetsTestsPassed, initializeOffsetsTestsRan = (
+    InitializeOffsetsTests.runInitializeOffsetTests()
+)
+numberOfTestsPassed += initializeOffsetsTestsPassed
+numberOfTestsRan += initializeOffsetsTestsRan
 
-if not InitializeOffsetsTests.initializeOffsetsWithRevisedWorld():
-    print("initializeOffsetsWithRevisedWorld failed. \n")
-else:
-    numberOfTestsPassed += 1
-numberOfTests += 1
+headerParseTestsPassed, headerParseTestsRan = HeaderParseTests.runHeaderParseTests()
+numberOfTestsPassed += headerParseTestsPassed
+numberOfTestsRan += headerParseTestsRan
 
-if not HeaderParseTests.initializeHeaderFieldsTests():
-    print("initializeHeaderFieldsTests failed. \n")
-else:
-    numberOfTestsPassed += 1
-numberOfTests += 1
-
-if not HeaderParseTests.processHeaderTests():
-    print("processHeaderTests failed. \n")
-else:
-    numberOfTestsPassed += 1
-numberOfTests += 1
-
-print(f"{numberOfTestsPassed} out of {numberOfTests} passed.")
+print(f"{numberOfTestsPassed} out of {numberOfTestsRan} passed.")

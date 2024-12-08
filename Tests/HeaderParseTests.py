@@ -8,7 +8,26 @@ import ParseWorldFile
 import WorldInfo
 from WorldFiles.Filepaths import WorldFilepaths
 
-# expectedHeaderFieldCount = 153
+HEADER_FIELD_COUNT = 152
+RELEVANT_HEADER_FIELDS = 19
+
+
+def runHeaderParseTests():
+    numberOfTestsPassed = 0
+    numberOfTests = 0
+    if not initializeHeaderFieldsTests():
+        print("initializeHeaderFieldsTests failed. \n")
+    else:
+        numberOfTestsPassed += 1
+    numberOfTests += 1
+
+    if not processHeaderTests():
+        print("processHeaderTests failed. \n")
+    else:
+        numberOfTestsPassed += 1
+    numberOfTests += 1
+
+    return (numberOfTestsPassed, numberOfTests)
 
 
 def initializeHeaderFieldsTests():
@@ -16,8 +35,8 @@ def initializeHeaderFieldsTests():
 
     Metadata.initializeHeaderFields()
 
-    # if expectedHeaderFieldCount != 153:
-    #     success = False
+    if len(Metadata.headerFields.items()) != HEADER_FIELD_COUNT:
+        success = False
 
     for key, value in Metadata.headerFields.items():
         if (
@@ -58,7 +77,7 @@ def processHeaderTests():
 
         file.close()
 
-    if filesUsed != 19:
+    if filesUsed != RELEVANT_HEADER_FIELDS:
         success = False
 
     return success
