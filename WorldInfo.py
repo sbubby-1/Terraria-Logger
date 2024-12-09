@@ -27,6 +27,26 @@ bossesSlain = {
 }
 
 
+def clearWorldInfo():
+    for key in bossesSlain:
+        bossesSlain[key] = False
+
+    relevantInfo.clear()
+    pyramidItems.clear()
+
+    global housingBuilt
+    housingBuilt = False
+
+    global guideInHell
+    guideInHell = False
+
+    global npcAtShimmer
+    npcAtShimmer = False
+
+    global talkedToDemo
+    talkedToDemo = False
+
+
 def getSeedInfo():
     seedInfo = {}
 

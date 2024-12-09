@@ -8,13 +8,22 @@ from CustomExceptions.InvalidWorldFile import InvalidWorldFile
 
 
 def analyzeWorld(filepath):
+    WorldInfo.clearWorldInfo()
     file = open(filepath, "rb")
-    offsets = initializeOffsets(file)
+    try:
+        offsets = initializeOffsets(file)
 
-    processHeader(file, offsets[Metadata.OffsetIndices.HEADER.value])
-    processChests(file, offsets[Metadata.OffsetIndices.CHESTS.value])
-    processTownManager(file, offsets[Metadata.OffsetIndices.TOWN_MANAGER.value])
-    processBestiary(file, offsets[Metadata.OffsetIndices.BESTIARY.value])
+        processHeader(file, offsets[Metadata.OffsetIndices.HEADER.value])
+        processChests(file, offsets[Metadata.OffsetIndices.CHESTS.value])
+        processTownManager(file, offsets[Metadata.OffsetIndices.TOWN_MANAGER.value])
+        processBestiary(file, offsets[Metadata.OffsetIndices.BESTIARY.value])
+    except (
+        CorruptedChestData,
+        InitializationFailed,
+        InvalidDataType,
+        InvalidWorldFile,
+    ) as e:
+        print(e.message)
 
     file.close()
 

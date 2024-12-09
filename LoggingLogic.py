@@ -7,6 +7,7 @@ from WorldInfo import getSeedInfo
 
 WORLDS_FOLDER_FILEPATH = "C:/Documents/My Games/Terraria/Worlds"
 SAVED_SEEDS_FILEPATH = "C:/Documents/My Games/Terraria/Saved Seeds"
+AUTOSAVE_FILEPATH = "Autosave.json"
 
 
 def resetTriggered():
@@ -32,7 +33,29 @@ def resetTriggered():
     if not foundFile:
         return
 
-    seedInfo = getSeedInfo()
+    attemptAutosave()
+
+
+def attemptAutosave():
+    with open(AUTOSAVE_FILEPATH, "r") as file:
+        autosaveRequirements = json.load(file, object_pairs_hook=dict)
+        if not autosaveRequirements["Autosave Enabled"]:
+            return
+
+        seedInfo = getSeedInfo()
+
+        for key, value in autosaveRequirements.items():
+            match key:
+                case "Autosave Enabled":
+                    continue
+                case "Minimum Pyramid Items":
+                    if len(seedInfo["Pyramid Items"]) < value:
+                        return
+                case _:
+                    if value and not seedInfo[key]:
+                        return
+
+        writeSeed(seedInfo)
 
 
 def saveSeed():
