@@ -1,5 +1,5 @@
 {
-  "World Name": { "type": "String", "isRelevant": true },
+  "World Name": { "type": "String", "isRelevant": false },
   "World Seed": { "type": "String", "isRelevant": true },
   "Generator Version": { "type": "Int64", "isRelevant": false },
   "Geneterator UID": { "type": "Byte 16", "isRelevant": false },
@@ -25,7 +25,7 @@
   "Ice Back": { "type": "Int32", "isRelevant": false },
   "Jungle Back Style": { "type": "Int32", "isRelevant": false },
   "Hell Back Style": { "type": "Int32", "isRelevant": false },
-  "Spawn X": { "type": "Int32", "isRelevant": false },
+  "Spawn X": { "type": "Int32", "isRelevant": true },
   "Spawn Y": { "type": "Int32", "isRelevant": false },
   "World Surface Y": { "type": "Double", "isRelevant": true },
   "Rock Layer Y": { "type": "Double", "isRelevant": false },
