@@ -2,9 +2,9 @@ import json
 from collections import OrderedDict
 from enum import Enum
 
-headerValuesFilepath = "HeaderValues.json"
-
 headerFields = OrderedDict()
+
+HEADER_VALUES_FILEPATH = "HeaderValues.json"
 
 PYRAMID_ITEM_IDS = {848, 857, 866, 934}
 
@@ -17,7 +17,7 @@ MULTIPLIER_FIELDS = {
 
 
 def initializeHeaderFields():
-    with open(headerValuesFilepath, "r") as file:
+    with open(HEADER_VALUES_FILEPATH, "r") as file:
         global headerFields
         headerFields = json.load(file, object_pairs_hook=OrderedDict)
 
