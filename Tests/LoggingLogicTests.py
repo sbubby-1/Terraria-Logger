@@ -3,7 +3,6 @@ import sys
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
-from CustomExceptions.InvalidWorldsFolder import InvalidWorldsFolder
 import LoggingLogic
 from LoggingLogic import WORLDS_FOLDER_FILEPATH
 
@@ -24,8 +23,14 @@ def runTests():
 def resetTriggeredTest():
     success = True
 
-    if not WORLDS_FOLDER_FILEPATH.endswith(r"/Terraria/Worlds"):
-        raise InvalidWorldsFolder()
+    if not (
+        WORLDS_FOLDER_FILEPATH.endswith(r"/Terraria/Worlds")
+        and os.path.exists(WORLDS_FOLDER_FILEPATH)
+    ):
+        print(
+            "resetTriggeredTest was not run because the Worlds folder filepath is invalid."
+        )
+        return False
 
     worldsFolderFiles = os.listdir(WORLDS_FOLDER_FILEPATH)
 

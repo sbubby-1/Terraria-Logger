@@ -69,6 +69,11 @@ class WorldFilepaths(Enum):
         "Moon Lord",
         Metadata.OffsetIndices.HEADER.value,
     )
+    NPC_AT_SHIMMER = WorldFile(
+        "./WorldFiles/npcAtShimmer.wld",
+        None,
+        Metadata.OffsetIndices.TOWN_MANAGER.value,
+    )
     PLANTERA = WorldFile(
         "./WorldFiles/Plantera.wld",
         "Plantera",

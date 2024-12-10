@@ -1,5 +1,5 @@
-import os
 import json
+import os
 
 from CustomExceptions.InvalidWorldsFolder import InvalidWorldsFolder
 from ParseWorldFile import analyzeWorld
@@ -11,7 +11,10 @@ AUTOSAVE_FILEPATH = "Autosave.json"
 
 
 def resetTriggered():
-    if not WORLDS_FOLDER_FILEPATH.endswith(r"/Terraria/Worlds"):
+    if not (
+        WORLDS_FOLDER_FILEPATH.endswith(r"/Terraria/Worlds")
+        and os.path.exists(WORLDS_FOLDER_FILEPATH)
+    ):
         raise InvalidWorldsFolder()
 
     worldsFolderFiles = os.listdir(WORLDS_FOLDER_FILEPATH)

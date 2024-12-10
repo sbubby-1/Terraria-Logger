@@ -57,7 +57,6 @@ def processTownManager(file, offset):
     if WorldInfo.bossesSlain["Wall of Flesh"]:
         WorldInfo.housingBuilt = True
         WorldInfo.guideInHell = True
-        return
 
     numberOfRooms = ReadDataTypes.readInt32(file)
     worldWidth = WorldInfo.relevantInfo["World Width"]

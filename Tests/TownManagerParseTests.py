@@ -31,6 +31,12 @@ def runTests():
         numberOfTestsPassed += 1
     numberOfTests += 1
 
+    if not npcAtShimmerTests():
+        print("npcAtShimmerTests failed. \n")
+    else:
+        numberOfTestsPassed += 1
+    numberOfTests += 1
+
     return (numberOfTestsPassed, numberOfTests)
 
 
@@ -85,4 +91,18 @@ def guideInHellTests():
     return success
 
 
-# TODO: Add world file and tests for NPC at shimmer.
+def npcAtShimmerTests():
+    success = True
+
+    with open(WorldFilepaths.NPC_AT_SHIMMER.value.filepath, "rb") as file:
+        offsets = ParseWorldFile.initializeOffsets(file)
+        ParseWorldFile.processHeader(file, offsets[Metadata.OffsetIndices.HEADER.value])
+
+        ParseWorldFile.processTownManager(
+            file, offsets[Metadata.OffsetIndices.TOWN_MANAGER.value]
+        )
+
+        if WorldInfo.npcAtShimmer == False:
+            success = False
+
+    return success
