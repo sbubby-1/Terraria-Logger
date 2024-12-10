@@ -1,7 +1,7 @@
 import json
 import os
 
-from CustomExceptions.InvalidWorldsFolder import InvalidWorldsFolder
+from CustomExceptions.InvalidFolder import InvalidFolder
 from ParseWorldFile import analyzeWorld
 from WorldInfo import getSeedInfo
 
@@ -15,7 +15,7 @@ def resetTriggered():
         WORLDS_FOLDER_FILEPATH.endswith(r"/Terraria/Worlds")
         and os.path.exists(WORLDS_FOLDER_FILEPATH)
     ):
-        raise InvalidWorldsFolder()
+        raise InvalidFolder("Worlds")
 
     worldsFolderFiles = os.listdir(WORLDS_FOLDER_FILEPATH)
 
