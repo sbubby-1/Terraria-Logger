@@ -2,28 +2,29 @@ from CustomExceptions.InitializationFailed import InitializationFailed
 
 relevantInfo = {}
 pyramidItems = []
+
 housingBuilt = False
+talkedToDemo = False
 guideInHell = False
 npcAtShimmer = False
-talkedToDemo = False
 
 bossesSlain = {
-    "Eye of Cthulhu": False,
+    "Deerclops": False,
+    "Empress of Light": False,
     "Evil Boss": False,
-    "Skeletron": False,
-    "Queen Bee": False,
-    "The Destroyer": False,
-    "The Twins": False,
-    "Skeletron Prime": False,
-    "Plantera": False,
+    "Eye of Cthulhu": False,
     "Golem": False,
     "King Slime": False,
-    "Wall of Flesh": False,
     "Lunatic Cultist": False,
     "Moon Lord": False,
-    "Empress of Light": False,
+    "Plantera": False,
+    "Queen Bee": False,
     "Queen Slime": False,
-    "Deerclops": False,
+    "Skeletron Prime": False,
+    "Skeletron": False,
+    "The Destroyer": False,
+    "The Twins": False,
+    "Wall of Flesh": False,
 }
 
 
@@ -37,14 +38,14 @@ def clearWorldInfo():
     global housingBuilt
     housingBuilt = False
 
+    global talkedToDemo
+    talkedToDemo = False
+
     global guideInHell
     guideInHell = False
 
     global npcAtShimmer
     npcAtShimmer = False
-
-    global talkedToDemo
-    talkedToDemo = False
 
 
 def getSeedInfo():
