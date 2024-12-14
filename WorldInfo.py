@@ -10,6 +10,7 @@ npcAtShimmer = False
 
 bossesSlain = {
     "Deerclops": False,
+    "Duke Fishron": False,
     "Empress of Light": False,
     "Evil Boss": False,
     "Eye of Cthulhu": False,

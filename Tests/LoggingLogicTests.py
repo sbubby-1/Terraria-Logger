@@ -5,6 +5,7 @@ import sys
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 
+from CustomExceptions.InvalidFolder import InvalidFolder
 import LoggingLogic
 import WorldInfo
 from LoggingLogic import SAVED_SEEDS_FILEPATH, WORLDS_FOLDER_FILEPATH
@@ -45,12 +46,19 @@ def runTests():
 
 
 def saveSeedTest():
+    try:
+        clearSavedSeedsFolder()
+    except InvalidFolder:
+        print("saveSeedTest was not run because the Worlds folder filepath is invalid.")
+        return False
+
     analyzeWorld(WorldFilepaths.SKELETRON.value.filepath)
     LoggingLogic.saveSeed()
 
     outputFilepath = os.path.join(
         SAVED_SEEDS_FILEPATH, f"{WorldInfo.relevantInfo["World Seed"]}.json"
     )
+
     if not os.path.exists(outputFilepath):
         return False
 
@@ -59,6 +67,14 @@ def saveSeedTest():
 
 # Works under the current Autosave.json but may not work if you change qualifications
 def attemptAutosaveQualificationsUnmetTest():
+    try:
+        clearSavedSeedsFolder()
+    except InvalidFolder:
+        print(
+            "attemptAutosaveQualificationsUnmetTest was not run because the Worlds folder filepath is invalid."
+        )
+        return False
+
     analyzeWorld(WorldFilepaths.SKELETRON.value.filepath)
 
     LoggingLogic.attemptAutosave()
@@ -66,7 +82,7 @@ def attemptAutosaveQualificationsUnmetTest():
     outputFilepath = os.path.join(
         SAVED_SEEDS_FILEPATH, f"{WorldInfo.relevantInfo["World Seed"]}.json"
     )
-    if not os.path.exists(outputFilepath):
+    if os.path.exists(outputFilepath):
         return False
 
     return True
@@ -74,6 +90,14 @@ def attemptAutosaveQualificationsUnmetTest():
 
 # Works under the current Autosave.json but may not work if you change qualifications
 def attemptAutosaveQualificationsMetTest():
+    try:
+        clearSavedSeedsFolder()
+    except InvalidFolder:
+        print(
+            "attemptAutosaveQualificationsMetTest was not run because the Worlds folder filepath is invalid."
+        )
+        return False
+
     analyzeWorld(WorldFilepaths.PLANTERA.value.filepath)
 
     LoggingLogic.attemptAutosave()
@@ -88,25 +112,13 @@ def attemptAutosaveQualificationsMetTest():
 
 
 def resetTriggeredTest():
-    if not (
-        WORLDS_FOLDER_FILEPATH.endswith(r"/Terraria/Worlds")
-        and os.path.exists(WORLDS_FOLDER_FILEPATH)
-    ):
+    try:
+        clearWorldsFolder()
+    except InvalidFolder:
         print(
             "resetTriggeredTest was not run because the Worlds folder filepath is invalid."
         )
         return False
-
-    worldsFolderFiles = os.listdir(WORLDS_FOLDER_FILEPATH)
-
-    for fileName in worldsFolderFiles:
-        if fileName.endswith(".wld"):
-            worldFilepath = os.path.join(WORLDS_FOLDER_FILEPATH, fileName)
-
-            if os.path.isdir(worldFilepath):
-                continue
-
-            os.remove(worldFilepath)
 
     shutil.copy(WorldFilepaths.DUKE_FISHRON.value.filepath, WORLDS_FOLDER_FILEPATH)
 
@@ -121,3 +133,35 @@ def resetTriggeredTest():
         return False
 
     return True
+
+
+def clearSavedSeedsFolder():
+    if not os.path.exists(SAVED_SEEDS_FILEPATH):
+        raise InvalidFolder("Saved Seeds Folder")
+
+    savedSeedsFolder = os.listdir(SAVED_SEEDS_FILEPATH)
+
+    for fileName in savedSeedsFolder:
+        if fileName.endswith(".json"):
+            worldFilepath = os.path.join(SAVED_SEEDS_FILEPATH, fileName)
+
+            if os.path.isdir(worldFilepath):
+                continue
+
+            os.remove(worldFilepath)
+
+
+def clearWorldsFolder():
+    if not os.path.exists(WORLDS_FOLDER_FILEPATH):
+        raise InvalidFolder("Worlds Folder")
+
+    worldsFolder = os.listdir(WORLDS_FOLDER_FILEPATH)
+
+    for fileName in worldsFolder:
+        if fileName.endswith(".wld"):
+            worldFilepath = os.path.join(WORLDS_FOLDER_FILEPATH, fileName)
+
+            if os.path.isdir(worldFilepath):
+                continue
+
+            os.remove(worldFilepath)
