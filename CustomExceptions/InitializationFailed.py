@@ -1,5 +1,6 @@
 class InitializationFailed(Exception):
     def __init__(self):
-        """Initialization was done incorrectly or did not finish."""
+        """Exception raised when initialization was done incorrectly or did not
+        finish."""
 
         self.message = f"Initialization was done incorrectly or did not finish."

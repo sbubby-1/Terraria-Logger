@@ -1,5 +1,5 @@
 class InvalidDataType(Exception):
     def __init__(self, dataType):
-        """The data type is unrecognized."""
+        """An Exception raised for an unrecognized data type."""
 
         self.message = f"{dataType} is not a recognized data type."
