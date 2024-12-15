@@ -1,19 +1,22 @@
-import os
-import tkinter as tk
-import keyboard
-import sys
-import WorldInfo
 from PIL import Image, ImageTk
+import WorldInfo
+import keyboard
+import os
+import sys
+import tkinter as tk
 
-CANVAS_WIDTH = 300
-CANVAS_HEIGHT = 80
-LINE_Y = 60
-ICON_Y = 50
-PADDING = 30
-BG_COLOR = "#161618"
 ASSETS_FOLDER = os.path.join(os.getcwd(), "Assets")
+BG_COLOR = "#161618"
+CANVAS_HEIGHT = 80
+CANVAS_WIDTH = 300
+ICON_Y = 50
+LINE_Y = 60
+PADDING = 30
 
+# The display window.
 root = tk.Tk()
+
+# The canvas on which widgets are drawn.
 canvas = tk.Canvas(
     root,
     width=CANVAS_WIDTH,
@@ -22,11 +25,19 @@ canvas = tk.Canvas(
     highlightthickness=0,
 )
 
+# All widgets that are currently drawn on the canvas.
 drawnWidgets = []
+
+# A list that holds references to ``PhotoImages`` so they're not removed by
+# garbage collection.
 preventImageGarbageCollection = []
 
 
 def startDisplay():
+    """
+    Initializes the display and begins the loop.
+    """
+
     setRootProperties()
     createCanvas()
 
@@ -34,6 +45,10 @@ def startDisplay():
 
 
 def toggleVisibility():
+    """
+    Toggles the visibility of the display window.
+    """
+
     if root.state() == "withdrawn":
         root.deiconify()
     else:
@@ -41,6 +56,10 @@ def toggleVisibility():
 
 
 def setRootProperties():
+    """
+    Configures the window's properties.
+    """
+
     root.configure(bg=BG_COLOR)
     root.title("Terraria Reset Feedback")
     root.iconbitmap(os.path.join(ASSETS_FOLDER, "King_Slime.ico"))
@@ -50,6 +69,10 @@ def setRootProperties():
 
 
 def drawWidgets():
+    """
+    Draws the Spawn, Dungeon, and Pyramid Items on the canvas.
+    """
+
     removeWidgets()
 
     try:
@@ -75,15 +98,29 @@ def drawWidgets():
 
     except Exception as e:
         print(e)
-        pass
 
 
 def drawIcon(position, iconPath):
+    """
+    Draws a single icon on the canvas.
+
+    Parameters:
+    ----------
+    position: Int
+        The position of the structure in the World. This is to be converted to
+        its position on the canvas.
+
+    iconPath: String
+        The path to the image for the icon.
+    ----------
+    """
+
     lineWidth = CANVAS_WIDTH - PADDING * 2
     worldWidth = WorldInfo.relevantInfo["World Width"]
     canvasPosition = (position * lineWidth) / worldWidth + PADDING
 
-    # The images are garbage collected and won't be displayed if I don't retain a reference to them.
+    # The images are garbage collected and won't be displayed if I don't retain
+    # a reference to them.
     iconImage = ImageTk.PhotoImage(Image.open(iconPath))
     preventImageGarbageCollection.append(iconImage)
 
@@ -92,6 +129,10 @@ def drawIcon(position, iconPath):
 
 
 def removeWidgets():
+    """
+    Reverts the canvas to a blank state.
+    """
+
     for widget in drawnWidgets:
         canvas.delete(widget)
 
@@ -100,6 +141,11 @@ def removeWidgets():
 
 
 def createCanvas():
+    """
+    Adds the canvas to the window along with a line representing the world
+    width.
+    """
+
     canvas.pack()
 
     canvas.create_line(
@@ -114,6 +160,10 @@ def createCanvas():
 
 
 def shutdown():
+    """
+    Cleanly exits the program.
+    """
+
     keyboard.unhook_all()
     root.destroy()
     sys.exit(0)
