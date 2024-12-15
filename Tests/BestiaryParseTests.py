@@ -3,10 +3,10 @@ import sys
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
+from WorldFiles.Filepaths import WorldFilepaths
 import Metadata
 import ParseWorldFile
 import WorldInfo
-from WorldFiles.Filepaths import WorldFilepaths
 
 
 def runTests():

@@ -2,9 +2,9 @@ import BestiaryParseTests
 import ChestDataParseTests
 import HeaderParseTests
 import InitializeOffsetsTests
+import LoggingLogicTests
 import TownManagerParseTests
 import WorldInfoTests
-import LoggingLogicTests
 
 numberOfTestsPassed = 0
 numberOfTestsRan = 0

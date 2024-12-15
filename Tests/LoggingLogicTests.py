@@ -6,12 +6,12 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
 
 from CustomExceptions.InvalidFolder import InvalidFolder
-import LoggingLogic
-import WorldInfo
 from LoggingLogic import SAVED_SEEDS_FILEPATH, WORLDS_FOLDER_FILEPATH
 from ParseWorldFile import analyzeWorld
 from WorldFiles.Filepaths import WorldFilepaths
 from WorldInfo import clearWorldInfo
+import LoggingLogic
+import WorldInfo
 
 
 def runTests():
