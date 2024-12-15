@@ -1,25 +1,26 @@
-Fresh.wld - A fresh world. Seed - 1.4.2.1334898976, Name - z
-Pyramid.wld - Contains all 3 pyramid items.
-KingSlime.wld - King Slime killed.
-EyeOfCthulhu.wld - Eye of Cthulhu killed.
-EvilBoss.wld - Brain of Cthulhu killed.
-QueenBee.wld - Queen Bee killed.
 Deerclops.wld - Deerclops killed.
-Skeletron.wld - Skeletron killed.
-WallOfFlesh.wld - Wall of Flesh killed.
-QueenSlime.wld - Queen Slime killed.
-TheTwins.wld - The Twins killed.
-TheDestroyer.wld - The Destroyer killed.
-SkeletronPrime.wld - Skeletron Prime killed.
-Plantera.wld - Plantera killed.
-Golem.wld - Golem killed.
 DukeFishron.wld - Duke Fishron killed.
 EmpressOfLight.wld - Empress of Light killed.
+EvilBoss.wld - Brain of Cthulhu killed.
+EyeOfCthulhu.wld - Eye of Cthulhu killed.
+Fresh.wld - A fresh world. Seed - 1.4.2.1334898976, Name - z
+Golem.wld - Golem killed.
+HellBedBuilt.wld - Guide house built in Underworld.
+HousingBuilt.wld - Housing built on the surface layer.
+KingSlime.wld - King Slime killed.
 LunaticCultist.wld - Lunatic Cultist (and Goblin Invasion) killed.
 MoonLord.wld - Moon Lord killed.
+Plantera.wld - Plantera killed.
+Player.wld - A player file with the file extension set as .wld.
+Pyramid.wld - Contains all 3 pyramid items.
+QueenBee.wld - Queen Bee killed.
+QueenSlime.wld - Queen Slime killed.
 SavedMechanic.wld - Mechanic saved.
 SavedWizard.wld - Wizard saved.
-HousingBuilt.wld - Housing built on the surface layer.
-HellBedBuilt.wld - Guide house built in Underworld.
+Skeletron.wld - Skeletron killed.
+SkeletronPrime.wld - Skeletron Prime killed.
 TalkedToDemo.wld - Talked to the Demolitionist.
-Player.wld - A player file with the file extension set as .wld.
+TheDestroyer.wld - The Destroyer killed.
+TheTwins.wld - The Twins killed.
+WallOfFlesh.wld - Wall of Flesh killed.
+npcAtShimmer.wld - A world with NPCs housed at shimmer.

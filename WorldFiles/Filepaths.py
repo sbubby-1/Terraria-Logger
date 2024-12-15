@@ -1,6 +1,6 @@
+from enum import Enum
 import os
 import sys
-from enum import Enum
 
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), "..")))
 
@@ -8,6 +8,17 @@ import Metadata
 
 
 class WorldFile:
+    """Holds relevant info for the world file.
+
+    Parameters: ---------- filepath: String The filepath of the file.
+
+    headerField: String The Key of WorldInfo.relevantInfo to be tested when
+    using this file. Only relevant for files whose relevant component is in
+    the Header portion of the file.
+
+    location: Metadata.OffsetIndices.Enumerable.value (Int) The index of
+    offsets that the relevant component of this file is located in."""
+
     def __init__(self, filepath, headerField, location):
         self.filepath = filepath
         self.headerField = headerField

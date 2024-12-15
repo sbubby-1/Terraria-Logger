@@ -43,7 +43,7 @@ def pyramidLootTests():
                     if item.chestX != 281 or item.chestY != 205:
                         success = False
                     containsPyramidItem[1] = True
-                case "Pharoah's Mask":
+                case "Pharaoh's Mask":
                     if item.chestX != 2390 or item.chestY != 209:
                         success = False
                     containsPyramidItem[2] = True
