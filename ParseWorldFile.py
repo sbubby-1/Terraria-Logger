@@ -1,16 +1,28 @@
-import Metadata
-import ReadDataTypes
-import WorldInfo
 from CustomExceptions.CorruptedChestData import CorruptedChestData
 from CustomExceptions.InitializationFailed import InitializationFailed
 from CustomExceptions.InvalidDataType import InvalidDataType
 from CustomExceptions.InvalidWorldFile import InvalidWorldFile
+import Metadata
+import ReadDataTypes
+import WorldInfo
 
 
 def analyzeWorld(filepath):
+    """
+    Analyzes the world and stores relevant info in ``WorldInfo`` fields.
+
+    Parameters:
+    ---------
+    filepath: String
+        The filepath to the world file to be analyzed.
+    ---------
+    """
+
     WorldInfo.clearWorldInfo()
     file = open(filepath, "rb")
+
     try:
+        # Contains the byte offset from the start of the file to each section.
         offsets = initializeOffsets(file)
 
         processHeader(file, offsets[Metadata.OffsetIndices.HEADER.value])
@@ -29,6 +41,18 @@ def analyzeWorld(filepath):
 
 
 def processBestiary(file, offset):
+    """
+    Processes the Bestiary section of the world file.
+
+    Parameters:
+    ----------
+    file: File
+        The file to be analyzed.
+    offset: Int
+        The byte offset to this section of the world file.
+    ----------
+    """
+
     file.seek(offset, 0)
 
     numberOfKills = ReadDataTypes.readInt32(file)
@@ -52,6 +76,18 @@ def processBestiary(file, offset):
 
 
 def processTownManager(file, offset):
+    """
+    Processes the Town Manager section of the world file.
+
+    Parameters:
+    ----------
+    file: File
+        The file to be analyzed.
+    offset: Int
+        The byte offset to this section of the world file.
+    ----------
+    """
+
     file.seek(offset, 0)
 
     if WorldInfo.bossesSlain["Wall of Flesh"]:
@@ -80,11 +116,24 @@ def processTownManager(file, offset):
 
                 if npcY > worldHeight * 0.75:
                     WorldInfo.guideInHell = True
+
         except Exception:
             raise InitializationFailed()
 
 
 def processChests(file, offset):
+    """
+    Processes the Chests section of the world file.
+
+    Parameters:
+    ----------
+    file: File
+        The file to be analyzed.
+    offset: Int
+        The byte offset to this section of the world file.
+    ----------
+    """
+
     file.seek(offset, 0)
 
     numberOfChests = ReadDataTypes.readInt16(file)
@@ -128,6 +177,11 @@ def processChests(file, offset):
 
 
 def checkIfItemIsPyramidLoot(itemID, chestX, chestY):
+    """
+    Checks if the items is a Pyramid item, and if so, adds it to
+    ``WorldInfo.pyramidItems``.
+    """
+
     pyramidItem = None
     match itemID:
         case 848:
@@ -142,6 +196,18 @@ def checkIfItemIsPyramidLoot(itemID, chestX, chestY):
 
 
 def processHeader(file, offset):
+    """
+    Processes the Header section of the world file.
+
+    Parameters:
+    ----------
+    file: File
+        The file to be analyzed.
+    offset: Int
+        The byte offset to this section of the world file.
+    ----------
+    """
+
     file.seek(offset, 0)
     Metadata.initializeHeaderFields()
 
@@ -150,6 +216,9 @@ def processHeader(file, offset):
         dataType = value["type"]
         isRelevant = value["isRelevant"]
 
+        # Some fields, such as ``Number of Partiers``, are stored in two parts.
+        # The second is a non-fixed-size array, and the first is the number of
+        # elements in the array.
         if field in Metadata.MULTIPLIER_FIELDS:
             multiplier = process(file, dataType)
             continue
@@ -168,6 +237,20 @@ def processHeader(file, offset):
 
 
 def process(file, dataType):
+    """
+    Processes and returns the next value in the file.
+
+    Parameters:
+    ----------
+    file: File
+        The file to be analyzed.
+    dataType: String
+        The dataType of the next value in String form.
+    ----------
+    Returns: Variable data type
+        The value read in.
+    """
+
     match dataType:
         case "Byte":
             return ReadDataTypes.readByte(file)
@@ -190,6 +273,18 @@ def process(file, dataType):
 
 
 def skipPast(file, dataType):
+    """
+    Skips past the next value in the file.
+
+    Parameters:
+    ----------
+    file: File
+        The file to be analyzed.
+    dataType: String
+        The dataType of the next value in String form.
+    ----------
+    """
+
     match dataType:
         case "String":
             _ = ReadDataTypes.readString(file)
@@ -198,6 +293,19 @@ def skipPast(file, dataType):
 
 
 def initializeOffsets(file):
+    """
+    Reads the initial section of the world file and initializes ``offsets``,
+    which contains the byte offsets to each section of the file.
+
+    Parameters:
+    ----------
+    file: File
+        The file to be analyzed.
+    ----------
+    Returns: [Int]
+        An array holding the byte offset to each section of the file.
+    """
+
     version = ReadDataTypes.readInt32(file)
     # 1.4.4.9 = 279
     if version < 267:
