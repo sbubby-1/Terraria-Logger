@@ -1,13 +1,29 @@
+"""
+Contains relevant info regarding an analyzed seed.
+"""
+
 from CustomExceptions.InitializationFailed import InitializationFailed
 
+# Relevant info from the ``Header`` section of the world file. Fields are
+# tagged as relevant in ``HeaderValues.json``.
 relevantInfo = {}
+
+# An array of ``PyramidItem``s.
 pyramidItems = []
 
+# Whether housing has been built in this world at all.
 housingBuilt = False
+
+# Whether the player has talked to the Demolitionist.
 talkedToDemo = False
+
+# Whether the Guide has been housed in the Underworld.
 guideInHell = False
+
+# Whether there is an NPC housed at shimmer.
 npcAtShimmer = False
 
+# Tracks which bosses have been killed.
 bossesSlain = {
     "Deerclops": False,
     "Duke Fishron": False,
@@ -30,6 +46,10 @@ bossesSlain = {
 
 
 def clearWorldInfo():
+    """
+    Resets WorldInfo to its original state.
+    """
+
     for key in bossesSlain:
         bossesSlain[key] = False
 
@@ -50,6 +70,14 @@ def clearWorldInfo():
 
 
 def getSeedInfo():
+    """
+    Returns info that will be saved to a JSON.
+
+    Returns: Dict
+        A Dictionary holding relevant info with values formatted in the style
+        they'll appear in the saved JSON.
+    """
+
     seedInfo = {}
 
     try:
