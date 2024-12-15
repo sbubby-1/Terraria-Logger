@@ -1,17 +1,23 @@
+from CustomExceptions.InvalidFolder import InvalidFolder
+from Display import drawWidgets
+from ParseWorldFile import analyzeWorld
+from WorldInfo import getSeedInfo
 import json
 import os
 
-from CustomExceptions.InvalidFolder import InvalidFolder
-from ParseWorldFile import analyzeWorld
-from WorldInfo import getSeedInfo
-from Display import drawWidgets
-
-WORLDS_FOLDER_FILEPATH = "C:/Documents/My Games/Terraria/Worlds"
-SAVED_SEEDS_FILEPATH = "C:/Documents/My Games/Terraria/Saved Seeds"
 AUTOSAVE_FILEPATH = "Autosave.json"
+SAVED_SEEDS_FILEPATH = "C:/Documents/My Games/Terraria/Saved Seeds"
+WORLDS_FOLDER_FILEPATH = "C:/Documents/My Games/Terraria/Worlds"
 
 
 def resetTriggered():
+    """
+    Looks through the world folder for .wld files. If one is found, it is
+    analyzed and deleted. If the world file meets criteria toggled in
+    ``Autosave.json``, its relevant info will be saved as a JSON in the Saved
+    Seeds folder.
+    """
+
     if not (
         WORLDS_FOLDER_FILEPATH.endswith(r"/Terraria/Worlds")
         and os.path.exists(WORLDS_FOLDER_FILEPATH)
@@ -43,6 +49,11 @@ def resetTriggered():
 
 
 def attemptAutosave():
+    """
+    Checks to see if the most recently opened world meets autosave criteria. If
+    so, it writes the relevant info to the saved seeds folder as a JSON.
+    """
+
     with open(AUTOSAVE_FILEPATH, "r") as file:
         autosaveRequirements = json.load(file, object_pairs_hook=dict)
         if not autosaveRequirements["Autosave Enabled"]:
@@ -65,10 +76,25 @@ def attemptAutosave():
 
 
 def saveSeed():
+    """
+    A function that exists to be passed in as an action for a keyboard shortcut
+    without requiring a parameter.
+    """
+
     writeSeed(getSeedInfo())
 
 
 def writeSeed(seedInfo):
+    """
+    Writes a JSON file to the saved seeds folder.
+
+    Parameters:
+    ----------
+    seedInfo: Dict
+        A dictionary holding relevant info about the most recently analyzed seed.
+    ----------
+    """
+
     if not os.path.exists(SAVED_SEEDS_FILEPATH):
         os.makedirs(SAVED_SEEDS_FILEPATH)
 
