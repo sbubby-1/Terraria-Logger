@@ -10,7 +10,7 @@ CANVAS_HEIGHT = 80
 LINE_Y = 60
 ICON_Y = 50
 PADDING = 30
-BG_COLOR = "#463f3f"
+BG_COLOR = "#161618"
 ASSETS_FOLDER = os.path.join(os.getcwd(), "Assets")
 
 root = tk.Tk()
@@ -31,6 +31,13 @@ def startDisplay():
     createCanvas()
 
     root.mainloop()
+
+
+def toggleVisibility():
+    if root.state() == "withdrawn":
+        root.deiconify()
+    else:
+        root.withdraw()
 
 
 def setRootProperties():
@@ -96,7 +103,13 @@ def createCanvas():
     canvas.pack()
 
     canvas.create_line(
-        PADDING, LINE_Y, CANVAS_WIDTH - PADDING, LINE_Y, width=4, fill="green"
+        PADDING,
+        LINE_Y,
+        CANVAS_WIDTH - PADDING,
+        LINE_Y,
+        width=4,
+        fill="#06402B",
+        capstyle="round",
     )
 
 
