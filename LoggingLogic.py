@@ -1,3 +1,7 @@
+"""
+Contains all logic pertaining to logging relevant info for a world.
+"""
+
 from CustomExceptions.InvalidFolder import InvalidFolder
 from Display import drawWidgets
 from ParseWorldFile import analyzeWorld

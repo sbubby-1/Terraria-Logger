@@ -1,3 +1,8 @@
+"""
+Contains all logic for listening to keyboard hotkeys and playing their
+corresponding actions.
+"""
+
 from Display import toggleVisibility
 from LoggingLogic import resetTriggered, saveSeed
 import keyboard

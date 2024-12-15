@@ -1,3 +1,7 @@
+"""
+Contains all logic for handling the display window and its contents.
+"""
+
 from PIL import Image, ImageTk
 import WorldInfo
 import keyboard

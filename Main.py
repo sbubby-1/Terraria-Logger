@@ -1,3 +1,7 @@
+"""
+The main execution file responsible for starting the program.
+"""
+
 from Display import startDisplay
 from KeyboardListener import startKeyboardListener
 import threading

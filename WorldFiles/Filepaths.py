@@ -1,3 +1,7 @@
+"""
+Contains an Enumerable with each world file and a class to represent them.
+"""
+
 from enum import Enum
 import os
 import sys
@@ -33,6 +37,10 @@ class WorldFile:
 
 
 class WorldFilepaths(Enum):
+    """
+    An Enum used for accessing world files and their testing info.
+    """
+
     DEERCLOPS = WorldFile(
         "./WorldFiles/Deerclops.wld", "Deerclops", Metadata.OffsetIndices.HEADER.value
     )
