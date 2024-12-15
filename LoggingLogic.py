@@ -4,6 +4,7 @@ import os
 from CustomExceptions.InvalidFolder import InvalidFolder
 from ParseWorldFile import analyzeWorld
 from WorldInfo import getSeedInfo
+from Display import drawWidgets
 
 WORLDS_FOLDER_FILEPATH = "C:/Documents/My Games/Terraria/Worlds"
 SAVED_SEEDS_FILEPATH = "C:/Documents/My Games/Terraria/Saved Seeds"
@@ -35,6 +36,8 @@ def resetTriggered():
 
     if not foundFile:
         return
+
+    drawWidgets()
 
     attemptAutosave()
 

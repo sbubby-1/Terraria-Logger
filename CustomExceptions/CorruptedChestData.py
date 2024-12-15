@@ -1,5 +1,5 @@
 class CorruptedChestData(Exception):
     def __init__(self):
-        """The Chest data is corrupted."""
+        """An Exception raised for corrupted chest data."""
 
         self.message = f"This Chest data is corrupted."

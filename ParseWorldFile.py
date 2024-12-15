@@ -131,7 +131,7 @@ def checkIfItemIsPyramidLoot(itemID, chestX, chestY):
     pyramidItem = None
     match itemID:
         case 848:
-            pyramidItem = Metadata.PyramidItem("Pharoah's Mask", chestX, chestY)
+            pyramidItem = Metadata.PyramidItem("Pharaoh's Mask", chestX, chestY)
         case 857:
             pyramidItem = Metadata.PyramidItem("Sandstorm in a Bottle", chestX, chestY)
         case 934:
