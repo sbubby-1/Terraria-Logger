@@ -5,6 +5,8 @@ feedback upon resetting and automatically saves worlds that meet set criteria.
 
 ## Display
 
+![Logger](https://github.com/user-attachments/assets/0ed39fdd-e0eb-42b9-8322-231c8f19521f)
+
 The purpose of the display is to provide realtime feedback in order to improve
 my pattern recognition with regards to world generation. As such, the display
 window is kept as small as possible and only shows information that I believe to be
