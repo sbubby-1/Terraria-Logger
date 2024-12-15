@@ -42,8 +42,8 @@ Ctrl + Shift + H - Toggles the visibility of the display.
 
 ## Compatibility
 
-This tool is created for personal use, and as such will not be adapted to other
-OS's, nor made compatible with older game versions (this tool is made for
-1.4.4.9 .wld file structure).
+This tool is created for personal use, and as such will not be adapted to OS's
+other than Windows, nor made compatible with older game versions (this tool is
+made for 1.4.4.9 .wld file structure).
 
 I may update this for future versions of the game.
