@@ -1,6 +1,6 @@
 ## Overview
 
-This is a tool that complements world resetting in Terraria. Its provides
+This is a tool that complements world resetting in Terraria. It provides
 feedback upon resetting and automatically saves worlds that meet set criteria.
 
 ## Display
